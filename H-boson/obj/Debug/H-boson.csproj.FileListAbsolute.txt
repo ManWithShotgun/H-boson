@@ -1,0 +1,9 @@
+D:\MyPrograms\CSharp\H-boson\H-boson\bin\Debug\H-boson.exe.config
+D:\MyPrograms\CSharp\H-boson\H-boson\bin\Debug\H-boson.exe
+D:\MyPrograms\CSharp\H-boson\H-boson\bin\Debug\H-boson.pdb
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H_boson.Form1.resources
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H_boson.Properties.Resources.resources
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H-boson.csproj.GenerateResource.Cache
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H-boson.exe
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H-boson.pdb
+D:\MyPrograms\CSharp\H-boson\H-boson\obj\Debug\H-boson.csprojResolveAssemblyReference.cache
