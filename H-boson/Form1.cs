@@ -140,10 +140,68 @@ namespace H_boson
 
         private bool Xsquad()
         {
-            double sigmaZ =((1-spin2.GetAce())-(1 - spin0.GetAce()))/(1-spin0.GetSigma());//(12)
-            if (z >= 0.4 && z <= 0.6)
+            double b=crossPoint(), s1, s2;
+            s1 = intergralParabl(spin0.GetAce() - spin0.GetSigma(), b);
+            s2 = intergralParabl(b, spin2.GetAce() + spin2.GetSigma());
+            //s1 = intergralNormal(spin0.GetAce() - spin0.GetSigma()*3, b);
+            //s2 = intergralNormal(b, spin2.GetAce() + spin2.GetSigma()*3);
+            double sigmaZ =Math.Abs(((spin0.GetAce())-(spin2.GetAce())))/(spin0.GetSigma());//(12)
+            //if (sigmaZ >= 1.96 || z <= -1.96)
+            //    return true;
+            //return false;
+            if (s1+s2<=0.05)
                 return true;
             return false;
+        }
+
+        private double crossPoint()//вычисление перескчения точек
+        {
+            GraphP one = spin0.GetGraphP(), two = spin2.GetGraphP();
+            double a, b, c;
+            a = one.a - two.a;
+            b = one.b - two.b;
+            c = one.c - two.c;
+            double d = b * b - 4 * a * c;
+            double x1, x2, y1, y2;
+            x1 = (-b + Math.Sqrt(d)) / (2 * a);
+            x2 = (-b - Math.Sqrt(d)) / (2 * a);
+            y1 = one.a * x1 * x1 + one.b * x1 + one.c;//нужная точка
+            y2 = one.a * x2 * x2 + one.b * x2 + one.c;
+            return x1;
+        }
+        private double intergralParabl(double a, double b)
+        {
+            double h, s, x;
+            h = 0.00001;
+            s = 0; x = a + h;
+            double fa = spin2.GetGraphP().ParablFunc(a);
+            double fb = spin2.GetGraphP().ParablFunc(b);
+            while (x < b)
+            {
+                s = s + 4 * spin2.GetGraphP().ParablFunc(x);
+                x = x + h;
+                s = s + 2 * spin2.GetGraphP().ParablFunc(x);
+                x = x + h;
+            }
+            s = h / 3 * (s + a - b);
+            return s;
+        }
+        private double intergralNormal(double a, double b)
+        {
+            double h, s, x;
+            h = 0.00001;
+            s = 0; x = a + h;
+            double fa = spin2.GetGraphP().NormalFunc(a);
+            double fb = spin2.GetGraphP().NormalFunc(b);
+            while (x < b)
+            {
+                s = s + 4 * spin2.GetGraphP().NormalFunc(x);
+                x = x + h;
+                s = s + 2 * spin2.GetGraphP().NormalFunc(x);
+                x = x + h;
+            }
+            s = h / 3 * (s + a - b);
+            return s;
         }
     }
 }

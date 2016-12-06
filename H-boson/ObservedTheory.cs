@@ -51,6 +51,10 @@ namespace H_boson
             GraphP graphP = (GraphP)graphs[2];
             return graphP.GetSigma();
         }
+        public GraphP GetGraphP()
+        {
+            return (GraphP)graphs[2];
+        }
         public void Show()
         {
             foreach(Graph g in graphs)

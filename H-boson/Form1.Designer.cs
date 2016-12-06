@@ -209,8 +209,7 @@
             chartArea4.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             chartArea4.AxisX2.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount;
             chartArea4.AxisX2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
-            chartArea4.AxisY.IsLogarithmic = true;
-            chartArea4.AxisY.Minimum = 1E-15D;
+            chartArea4.AxisY.Minimum = 0D;
             chartArea4.AxisY.Title = "Arbitrary units";
             chartArea4.AxisY.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             chartArea4.Name = "ChartArea1";

@@ -11,7 +11,7 @@ namespace H_boson
     class GraphP: Graph
     {
         private Series series;
-        private double z;
+        public double z, a, b, c;
         private int n;
         private List<ZAce> listAce;
 
@@ -32,9 +32,18 @@ namespace H_boson
             {
                 double ace = SearchAce(this.z);
                 double sigma = Sigma(ace);
-                series.Points.AddXY(ace - sigma, 0.00000000000001);
-                series.Points.AddXY(ace, 1);
-                series.Points.AddXY(ace + sigma, 0.00000000000001);
+                //series.Points.AddXY(ace - sigma, 0.00000000000001);
+                //series.Points.AddXY(ace, 1);
+                //series.Points.AddXY(ace + sigma, 0.00000000000001);
+                CalcKoef(ace - sigma, 0.00000000000001, ace, 1, ace + sigma, 0.00000000000001);
+                for (double i = -0.9; i < 1.5; i += 0.1)
+                {
+                    series.Points.AddXY(i, ParablFunc(i));
+                }
+                //for (double i = ace - sigma * 3; i < ace + sigma * 3; i += 0.1)
+                //{
+                //    series.Points.AddXY(i, NormalFunc(i));
+                //}
             }
         }
         private double Sigma(double ace)
@@ -58,6 +67,23 @@ namespace H_boson
         public double GetSigma()
         {
             return Sigma(SearchAce(this.z));
+        }
+        public double ParablFunc(double x)
+        {
+            return (a * x * x + b * x + c);
+        }
+        public double NormalFunc(double x)
+        {
+            double step=-((Math.Pow(x-GetAce(),2.0f))/(2*GetSigma()*GetSigma()));
+            double a = (1 / (GetSigma() * Math.Sqrt(2 * Math.PI)));
+            return a * Math.Exp(step);
+        }
+        private void CalcKoef(double x1, double y1, double x2, double y2, double x3, double y3)
+        {
+            double preA = y3 - (x3 * (y2 - y1) + x2 * y1 - x1 * y2) / (x2 - x1);
+            a = preA / (x3 * (x3 - x1 - x2) + x1 * x2);
+            b = (y2 - y1) / (x2 - x1) - a * (x1 + x2);
+            c = (x2 * y1 - x1 * y2) / (x2 - x1) + a * x1 * x2;
         }
     }
 }
